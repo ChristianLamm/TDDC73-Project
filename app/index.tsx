@@ -1,4 +1,5 @@
-import { Text, View } from "react-native";
+import { Text, TextInput, View } from "react-native";
+import PWTest from "@/components/testPassword"
 
 export default function Index() {
   return (
@@ -9,7 +10,10 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <Text>Input your password.</Text>
+      <TextInput> . . .</TextInput>
+      <PWTest password="textInput" ></PWTest>
+      
     </View>
   );
 }
