@@ -48,6 +48,7 @@ const confirmButton = () => {
       title= 'Confirm'
       onPress={confirmButton}
       /> 
+
     </View>
   );
 };
