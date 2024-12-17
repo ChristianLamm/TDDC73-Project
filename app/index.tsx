@@ -7,12 +7,12 @@ export default function Index() {
 
 
 
-const [password, setValue] = useState('');
+const [password, setPassword] = useState('');
 
 
 
 const handleInputChange = (text: string) => {
-  setValue(text);
+  setPassword(text);
   
   
    //alternativ 1: skicka vidare password till testPassword live för att avgöra styrka
@@ -35,7 +35,6 @@ const confirmButton = () => {
       <Text>Test the strength of your password</Text>
       <TextInput
        style={[styles.input, {color: '#000000'}]}
-       
        value={password}
        onChangeText={handleInputChange}
        placeholder="Insert password..."
@@ -45,7 +44,6 @@ const confirmButton = () => {
        
        //color='#000000'
       />
-      {/*<PWTest password="textInput" ></PWTest>*/}
       <Button
       title= 'Confirm'
       onPress={confirmButton}
@@ -63,12 +61,9 @@ const confirmButton = () => {
       padding: 20,
       borderColor: '#000000',
       borderWidth: 1,
-      color: '#000000',
+      width: "60%"
       //textDecorationColor: '#000000',
     },
-    textInput:{
-
-    
-    }
+  
   })
 
