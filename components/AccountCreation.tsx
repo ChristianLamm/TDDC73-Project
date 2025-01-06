@@ -1,26 +1,25 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-
+import React, { useState } from "react"
+import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native"
+import { IconSymbol } from "@/components/ui/IconSymbol"
 
 interface FieldConfig {
   // Beställmer om ett fält ska visas eller ej
-  show: boolean;
+  show: boolean
   // Bestämmer om ett fält är mandatory eller ej. ? för att den kan vara null / optional
-  required?: boolean;
+  required?: boolean
 }
 
 interface AccountCreationProps {
   // Skapa konto med email eller username?
-  accountType: 'email' | 'username';
-  
+  accountType: "email" | "username"
+
   fields?: {
-    firstName?: FieldConfig;  //Välj vilka fält som ska vara synliga
-    lastName?: FieldConfig;
-    password?: FieldConfig;
-  };
+    firstName?: FieldConfig //Välj vilka fält som ska vara synliga
+    lastName?: FieldConfig
+    password?: FieldConfig
+  }
   // Tar hand om onSubmit fältens data, och att vi kan göra en funktion i komponenten
-  onSubmit: (data: { [key: string]: string }) => void;
+  onSubmit: (data: { [key: string]: string }) => void
 }
 
 const AccountCreationForm: React.FC<AccountCreationProps> = ({
@@ -28,81 +27,90 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
   fields = {},
   onSubmit,
 }) => {
-  
   // Formulärs inputs
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [password, setPassword] = useState("")
 
   // Checkar alla krav på inputs
   const handleSubmit = () => {
-    const formData: { [key: string]: string } = {};
+    const formData: { [key: string]: string } = {}
 
     // Kollar så mail fältet är ifyllt
-    if (accountType === 'email' && !email) {
-      Alert.alert('Error', 'Email is required.');
-      return;
+    if (accountType === "email" && !email) {
+      Alert.alert("Error", "Email is required.")
+      return
     }
     // Kollar så username fältet är ifyllt
-    if (accountType === 'username' && !username) {
-      Alert.alert('Error', 'Username is required.');
-      return;
+    if (accountType === "username" && !username) {
+      Alert.alert("Error", "Username is required.")
+      return
     }
 
     // Sätt formData till värde
-    if (accountType === 'email') formData.email = email;
-    if (accountType === 'username') formData.username = username;
+    if (accountType === "email") formData.email = email
+    if (accountType === "username") formData.username = username
 
     // Kollar om firstname fältet visas, och om det är ett krav att fylla i
     if (fields.firstName?.show) {
       if (fields.firstName.required && !firstName) {
-        Alert.alert('Error', 'First Name is required.');
-        return;
+        Alert.alert("Error", "First Name is required.")
+        return
       }
-      formData.firstName = firstName;
+      formData.firstName = firstName
     }
 
     // Samma som firstname checken
     if (fields.lastName?.show) {
       if (fields.lastName.required && !lastName) {
-        Alert.alert('Error', 'Last Name is required.');
-        return;
+        Alert.alert("Error", "Last Name is required.")
+        return
       }
-      formData.lastName = lastName;
+      formData.lastName = lastName
     }
 
     // Samma som firstname checken
     if (fields.password?.show) {
       if (fields.password.required && !password) {
-        Alert.alert('Error', 'Password is required.');
-        return;
+        Alert.alert("Error", "Password is required.")
+        return
       }
-      formData.password = password;
+      formData.password = password
     }
 
     // Ger tillbaka datan från formData till "funktionen" i huvudfilen
     // i detta fall "handleAccountCreation" i albin.tsx
-    onSubmit(formData);
-  };
+    onSubmit(formData)
+  }
 
   return (
     <View style={styles.container}>
-      {accountType == 'email' ? (
-      <View style={styles.sidebyside}>
-        <IconSymbol size={28} name="mail" color="#ffffff" style={styles.icon}/>
-        <Text style={styles.title}>Create Account with Email</Text>
-      </View>
+      {accountType == "email" ? (
+        <View style={styles.sidebyside}>
+          <IconSymbol
+            size={28}
+            name="mail"
+            color="#ffffff"
+            style={styles.icon}
+          />
+          <Text style={styles.title}>Create Account with Email</Text>
+        </View>
       ) : (
-      <View style={styles.sidebyside}>
-        <IconSymbol size={28} name="person" color="#ffffff" style={styles.icon}/>
-        <Text style={styles.title}>Create Account with Username</Text>
-      </View>
+        <View style={styles.sidebyside}>
+          <IconSymbol
+            size={28}
+            name="person"
+            color="#ffffff"
+            style={styles.icon}
+          />
+          <Text style={styles.title}>Create Account with Username</Text>
+        </View>
       )}
 
       {/* Visa Email eller Username fältet baserad på accountType */}
-      {accountType === 'email' ? (
+      {accountType === "email" ? (
         <View>
           <Text style={styles.text}>Email:</Text>
           <TextInput
@@ -142,7 +150,7 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
 
       {/* Lastname */}
       {fields.lastName?.show && (
-        <View >
+        <View>
           <Text style={styles.text}>Last Name:</Text>
           <TextInput
             style={styles.input}
@@ -170,42 +178,40 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
       {/* Submit Button */}
       <Button color="#ffffff" title="Create Account" onPress={handleSubmit} />
     </View>
-  );
-};
+  )
+}
 
-export default AccountCreationForm;
+export default AccountCreationForm
 
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
-    color: "#ffffff"
+    fontWeight: "bold",
+    color: "#ffffff",
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 5,
     padding: 10,
     marginVertical: 8,
-    color: "#ffffff"
+    color: "#ffffff",
   },
   text: {
-    color: "#ffffff"
+    color: "#ffffff",
   },
   sidebyside: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 20,
-    padding: 10
+    padding: 10,
   },
   icon: {
     position: "absolute",
-    left: 0
+    left: 0,
   },
- 
-});
+})
