@@ -22,12 +22,12 @@ const AlbinScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <AccountCreation
-        accountType="username" // Byt mellan username och email
+        accountType="email" // Byt mellan username och email
         fields={{
           // Välj vilka input fields
-          firstName: { show: true, required: true },
-          lastName: { show: true }, // required = false om inget anges
+          lastName: { show: true, required: false }, // required = false om inget anges
           password: { show: true, required: true },
+          firstName: {show: false}
         }}
         onSubmit={handleAccountCreation}
       />
