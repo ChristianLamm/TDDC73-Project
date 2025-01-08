@@ -1,7 +1,7 @@
 import { Text, TextInput, View, StyleSheet, Button } from "react-native";
 import React, { useState } from "react";
 import { Colors } from "react-native/Libraries/NewAppScreen";
-import TestPassword from "@/components/testPassword";
+import TestPassword from "@/components/TestPassword";
 
 export default function Index() {
   const [password, setPassword] = useState("");
@@ -34,13 +34,14 @@ export default function Index() {
         placeholderTextColor="#000000"
         cursorColor="blue"
         selectionColor="#000000"
+        secureTextEntry
 
         //color='#000000'
       />
-
+      <Text>Strength of password:</Text>
       <TestPassword testPassword={password} />
 
-      <Button title="Confirm" onPress={confirmButton} />
+      {/* <Button title="Confirm" onPress={confirmButton} /> */}
     </View>
   );
 }
