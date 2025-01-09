@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, TextInput, Text, StyleSheet, Switch } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 //password as arg
@@ -12,7 +12,7 @@ const TestPassword = ({ testPassword }: { testPassword: string }) => {
     let strengthLevel = "";
 
     const attributes = {
-      length: /.{8,}/,
+      length: /.{8,}/, // needs this to even be considere valid(will show Too Short until fixed)
       lengthPlus: /.{12,}/,
       gotNumber: /[0-9]/,
       lowCase: /[a-z]/,
@@ -22,32 +22,36 @@ const TestPassword = ({ testPassword }: { testPassword: string }) => {
 
     let points = 0;
 
-    if (attributes.length.test(testPassword)) points++;
     if (attributes.lengthPlus.test(testPassword)) points++;
     if (attributes.gotNumber.test(testPassword)) points++;
     if (attributes.lowCase.test(testPassword)) points++;
     if (attributes.highCase.test(testPassword)) points++;
     if (attributes.specChar.test(testPassword)) points++;
 
-    switch (points) {
-      case 0:
-        strengthLevel = "Too Short";
-        break;
-      case 1:
-      case 2:
-        strengthLevel = "Weak";
-        break;
-      case 3:
-      case 4:
-        strengthLevel = "Medium";
-        break;
-      case 5:
-      case 6:
-        strengthLevel = "Strong";
-        break;
-      default:
-        strengthLevel = "";
-        break;
+    const emptyStr: string = "";
+
+    if (testPassword == emptyStr) {
+      strengthLevel = "";
+    } else if (!attributes.length.test(testPassword)) {
+      strengthLevel = "TOO SHORT";
+    } else {
+      switch (points) {
+        case 0:
+        case 1:
+          strengthLevel = "WEAK";
+          break;
+        case 2:
+        case 3:
+          strengthLevel = "MEDIUM";
+          break;
+        case 4:
+        case 5:
+          strengthLevel = "STRONG";
+          break;
+        default:
+          strengthLevel = "";
+          break;
+      }
     }
     setStrength(strengthLevel);
   };
@@ -58,13 +62,13 @@ const TestPassword = ({ testPassword }: { testPassword: string }) => {
 
   const strengthColor = (): readonly [string, string] => {
     switch (strength) {
-      case "Too Short":
+      case "TOO SHORT":
         return ["#FF4D4D", "#FF4D4D"] as const;
-      case "Weak":
-        return ["#FFA500", "#FFD700"] as const;
-      case "Medium":
-        return ["#FFC107", "#4CAF50"] as const;
-      case "Strong":
+      case "WEAK":
+        return ["#FF4D4D", "#FF4D4D"] as const;
+      case "MEDIUM":
+        return ["#FFD700", "#FFA500"] as const;
+      case "STRONG":
         return ["#4CAF50", "#2E7D32"] as const;
       default:
         return ["#E0E0E0", "#BDBDBD"] as const;
@@ -73,40 +77,52 @@ const TestPassword = ({ testPassword }: { testPassword: string }) => {
 
   const strengthWidth = (): number => {
     switch (strength) {
-      case "Too Short":
-        return 50;
-      case "Weak":
+      case "TOO SHORT":
+        return 0;
+      case "WEAK":
+        return 34;
+      case "MEDIUM":
+        return 68;
+      case "STRONG":
         return 100;
-      case "Medium":
-        return 200;
-      case "Strong":
-        return 300;
       default:
         return 0;
     }
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.textStyle}> {strength}</Text>
       {/*<LinearGradient style={styles.gradient} colors={strengthColor()} />*/}
-      <LinearGradient
-        colors={strengthColor()}
-        style={[styles.bar, { width: `${strengthWidth()}%` }]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-      />
+      <View style={styles.gradientContainer}>
+        <LinearGradient
+          colors={strengthColor()}
+          style={[styles.bar, { width: `${strengthWidth()}%` }]}
+          start={{ x: 1, y: 0 }}
+          end={{ x: 0, y: 1 }}
+        />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    width: 100,
+    padding: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   textStyle: {
     paddingTop: 5,
+    paddingBottom: 5,
   },
   bar: {
+    // paddingLeft: 100,
+    // paddingRight: 100,
+
     height: 10,
-    borderRadius: 5,
+    borderRadius: 10,
     backgroundColor: "#d3d3d3",
     //width: 40,
   },
@@ -115,6 +131,16 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     borderRadius: 5,
+  },
+  view: {
+    width: 100,
+  },
+  gradientContainer: {
+    width: "100%",
+    height: 8,
+    backgroundColor: "#E0E0E0",
+    borderRadius: 4,
+    overflow: "hidden",
   },
 });
 

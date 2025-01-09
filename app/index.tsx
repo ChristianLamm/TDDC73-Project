@@ -25,7 +25,7 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Test the strength of your password</Text>
+      <Text style={styles.text}>Test the strength of your password</Text>
       <TextInput
         style={[styles.input, { color: "#000000" }]}
         value={password}
@@ -55,5 +55,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: "60%",
     //textDecorationColor: '#000000',
+  },
+  text: {
+    fontSize: 20,
   },
 });
