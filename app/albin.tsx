@@ -27,11 +27,10 @@ const AlbinScreen = () => {
           // Välj vilka input fields
           lastName: { show: true, required: false }, // required = false om inget anges
           password: { show: true, required: true },
-          firstName: {show: false}
+          firstName: { show: false },
         }}
         onSubmit={handleAccountCreation}
       />
-      <Text>hello</Text>
     </SafeAreaView>
   )
 }

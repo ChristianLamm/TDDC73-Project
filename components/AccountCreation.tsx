@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native"
 import { IconSymbol } from "@/components/ui/IconSymbol"
+import TestPassword from "./TestPassword"
 
 interface FieldConfig {
   // Beställmer om ett fält ska visas eller ej
@@ -172,6 +173,7 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
             onChangeText={setPassword}
             secureTextEntry
           />
+          <TestPassword testPassword={password} />
         </View>
       )}
 
