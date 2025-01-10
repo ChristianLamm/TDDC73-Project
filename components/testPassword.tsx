@@ -3,7 +3,6 @@ import { View, Text, StyleSheet } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 
 //password as arg
-
 const TestPassword = ({
   testPassword,
   textColor,
@@ -99,7 +98,6 @@ const TestPassword = ({
   return (
     <View style={styles.container}>
       <Text style={[styles.textStyle, { color: textColor }]}> {strength}</Text>
-      {/*<LinearGradient style={styles.gradient} colors={strengthColor()} />*/}
       <View style={styles.gradientContainer}>
         <LinearGradient
           colors={strengthColor()}
@@ -124,13 +122,9 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
   bar: {
-    // paddingLeft: 100,
-    // paddingRight: 100,
-
     height: 10,
     borderRadius: 10,
     backgroundColor: "#d3d3d3",
-    //width: 40,
   },
   gradient: {
     flex: 1,
