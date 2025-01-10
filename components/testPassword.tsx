@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import React, { useEffect, useState } from "react"
+import { View, Text, StyleSheet } from "react-native"
+import { LinearGradient } from "expo-linear-gradient"
 
 //password as arg
 
-const TestPassword = ({ testPassword }: { testPassword: string }) => {
-  console.log(testPassword);
-  const [strength, setStrength] = useState<string>("");
+const TestPassword = ({
+  testPassword,
+  textColor,
+}: {
+  testPassword: string
+  textColor: string
+}) => {
+  console.log(testPassword)
+  const [strength, setStrength] = useState<string>("")
 
   const calcStrength = (testPassword: string) => {
-    let strengthLevel = "";
+    let strengthLevel = ""
 
     const attributes = {
       length: /.{8,}/, // needs this to even be considere valid(will show Too Short until fixed)
@@ -18,81 +24,81 @@ const TestPassword = ({ testPassword }: { testPassword: string }) => {
       lowCase: /[a-z]/,
       highCase: /[A-Z]/,
       specChar: /[!@¤%&/{}()+?´'*§]/,
-    };
+    }
 
-    let points = 0;
+    let points = 0
 
-    if (attributes.lengthPlus.test(testPassword)) points++;
-    if (attributes.gotNumber.test(testPassword)) points++;
-    if (attributes.lowCase.test(testPassword)) points++;
-    if (attributes.highCase.test(testPassword)) points++;
-    if (attributes.specChar.test(testPassword)) points++;
+    if (attributes.lengthPlus.test(testPassword)) points++
+    if (attributes.gotNumber.test(testPassword)) points++
+    if (attributes.lowCase.test(testPassword)) points++
+    if (attributes.highCase.test(testPassword)) points++
+    if (attributes.specChar.test(testPassword)) points++
 
-    const emptyStr: string = "";
+    const emptyStr: string = ""
 
     if (testPassword == emptyStr) {
-      strengthLevel = "";
+      strengthLevel = ""
     } else if (!attributes.length.test(testPassword)) {
-      strengthLevel = "TOO SHORT";
+      strengthLevel = "TOO SHORT"
     } else {
       switch (points) {
         case 0:
         case 1:
-          strengthLevel = "WEAK";
-          break;
+          strengthLevel = "WEAK"
+          break
         case 2:
         case 3:
-          strengthLevel = "MEDIUM";
-          break;
+          strengthLevel = "MEDIUM"
+          break
         case 4:
         case 5:
-          strengthLevel = "STRONG";
-          break;
+          strengthLevel = "STRONG"
+          break
         default:
-          strengthLevel = "";
-          break;
+          strengthLevel = ""
+          break
       }
     }
-    setStrength(strengthLevel);
-  };
+    setStrength(strengthLevel)
+  }
 
   useEffect(() => {
-    calcStrength(testPassword);
-  }, [testPassword]);
+    calcStrength(testPassword)
+  }, [testPassword])
 
   const strengthColor = (): readonly [string, string] => {
     switch (strength) {
       case "TOO SHORT":
-        return ["#FF4D4D", "#FF4D4D"] as const;
+        return ["#FF4D4D", "#FF4D4D"] as const
       case "WEAK":
-        return ["#FF4D4D", "#FF4D4D"] as const;
+        return ["#FF4D4D", "#FF4D4D"] as const
       case "MEDIUM":
-        return ["#FFD700", "#FFA500"] as const;
+        return ["#FFD700", "#FFA500"] as const
       case "STRONG":
-        return ["#4CAF50", "#2E7D32"] as const;
+        return ["#4CAF50", "#2E7D32"] as const
       default:
-        return ["#E0E0E0", "#BDBDBD"] as const;
+        return ["#E0E0E0", "#BDBDBD"] as const
     }
-  };
+  }
 
   const strengthWidth = (): number => {
     switch (strength) {
       case "TOO SHORT":
-        return 0;
+        return 0
       case "WEAK":
-        return 34;
+        return 34
       case "MEDIUM":
-        return 68;
+        return 68
       case "STRONG":
-        return 100;
+        return 100
       default:
-        return 0;
+        return 0
     }
-  };
+  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textStyle}> {strength}</Text>
+      <Text style={[styles.textStyle, { color: textColor }]}> {strength}</Text>
       {/*<LinearGradient style={styles.gradient} colors={strengthColor()} />*/}
       <View style={styles.gradientContainer}>
         <LinearGradient
@@ -103,12 +109,12 @@ const TestPassword = ({ testPassword }: { testPassword: string }) => {
         />
       </View>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
-    width: 100,
+    width: 200,
     padding: 10,
     justifyContent: "center",
     alignItems: "center",
@@ -142,6 +148,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     overflow: "hidden",
   },
-});
+})
 
-export default TestPassword;
+export default TestPassword

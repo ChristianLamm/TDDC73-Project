@@ -98,7 +98,7 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
           />
           <Text style={styles.title}>Create Account with Email</Text>
         </View>
-      ) : (
+      ) : accountType === "username" ? (
         <View style={styles.sidebyside}>
           <IconSymbol
             size={28}
@@ -108,7 +108,7 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
           />
           <Text style={styles.title}>Create Account with Username</Text>
         </View>
-      )}
+     ): null}
 
       {/* Visa Email eller Username fältet baserad på accountType */}
       {accountType === "email" ? (
@@ -120,6 +120,17 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
+            autoCapitalize="none"
+          />
+        </View>
+      ) : accountType === "username" ? (
+        <View>
+          <Text style={styles.text}>Username:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your username"
+            value={username}
+            onChangeText={setUsername}
             autoCapitalize="none"
           />
         </View>
@@ -173,7 +184,9 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
             onChangeText={setPassword}
             secureTextEntry
           />
-          <TestPassword testPassword={password} />
+          <View style={{ alignSelf: "center" }}>
+            <TestPassword testPassword={password} textColor="#ffffff" />
+          </View>
         </View>
       )}
 

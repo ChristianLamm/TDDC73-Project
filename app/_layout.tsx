@@ -30,7 +30,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Christian",
+          title: "Test Password",
           tabBarIcon: ({ color }) => (
             <IconSymbol size={28} name="person" color={color} />
           ),
@@ -38,9 +38,9 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="albin"
+        name="AccountRegistration"
         options={{
-          title: "Albin",
+          title: "Account Registration",
           tabBarIcon: ({ color }) => (
             <IconSymbol size={28} name="house.fill" color={color} />
           ),

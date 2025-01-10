@@ -12,7 +12,7 @@ import React, { useState } from "react"
 import { Colors } from "react-native/Libraries/NewAppScreen"
 import AccountCreation from "@/components/AccountCreation"
 
-const AlbinScreen = () => {
+const AccountRegistration = () => {
   // Handle form submission
   const handleAccountCreation = (data: { [key: string]: string }) => {
     Alert.alert("Account Created!", JSON.stringify(data, null, 2))
@@ -22,12 +22,12 @@ const AlbinScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <AccountCreation
-        accountType="email" // Byt mellan username och email
+        accountType="email" // Byt mellan username & email 
         fields={{
           // Välj vilka input fields
+          firstName: { show: true, required: false },
           lastName: { show: true, required: false }, // required = false om inget anges
           password: { show: true, required: true },
-          firstName: { show: false },
         }}
         onSubmit={handleAccountCreation}
       />
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default AlbinScreen
+export default AccountRegistration
