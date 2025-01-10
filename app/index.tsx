@@ -3,12 +3,10 @@ import {
   TextInput,
   View,
   StyleSheet,
-  Button,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native"
 import React, { useState } from "react"
-import { Colors } from "react-native/Libraries/NewAppScreen"
 import TestPassword from "@/components/TestPassword"
 
 export default function Index() {
@@ -20,12 +18,7 @@ export default function Index() {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: "#1a1a1a",
-        }}
-      >
+      <View style={styles.container}>
         <View style={styles.background}>
           <Text style={styles.text}>Test the strength of your password</Text>
           <TextInput
@@ -44,6 +37,10 @@ export default function Index() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#1a1a1a",
+  },
   input: {
     height: 40,
     fontSize: 16,
