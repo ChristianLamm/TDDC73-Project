@@ -25,18 +25,18 @@ const TestPassword = ({
       specChar: /[!@¤%&/{}()+?´'*§]/,
     }
 
-    let points = 0
+    let points: number = 0
 
+    // "length" är inte med här för att det ej ska visas något innan man skriver in lösenord
     if (attributes.lengthPlus.test(testPassword)) points++
     if (attributes.gotNumber.test(testPassword)) points++
     if (attributes.lowCase.test(testPassword)) points++
     if (attributes.highCase.test(testPassword)) points++
     if (attributes.specChar.test(testPassword)) points++
 
-    const emptyStr: string = ""
-
-    if (testPassword == emptyStr) {
+    if (!testPassword) {
       strengthLevel = ""
+      // Check so length is atleast 8 characters
     } else if (!attributes.length.test(testPassword)) {
       strengthLevel = "TOO SHORT"
     } else {
@@ -61,6 +61,7 @@ const TestPassword = ({
     setStrength(strengthLevel)
   }
 
+  // Varje gång ett tecken ändras, testa password
   useEffect(() => {
     calcStrength(testPassword)
   }, [testPassword])

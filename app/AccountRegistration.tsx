@@ -1,17 +1,11 @@
 import {
-  Text,
-  TextInput,
-  View,
   StyleSheet,
-  Button,
   SafeAreaView,
   Alert,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native"
-import React, { useState } from "react"
-//import PWTest from "@/components/testPassword"
-import { Colors } from "react-native/Libraries/NewAppScreen"
+import React from "react"
 import AccountCreation from "@/components/AccountCreation"
 
 const AccountRegistration = () => {
@@ -29,7 +23,7 @@ const AccountRegistration = () => {
           fields={{
             // Välj vilka input fields
             firstName: { show: true, required: false },
-            lastName: { show: true, required: false }, // required = false om inget anges
+            lastName: { show: true }, // required = false om inget anges
             password: { show: true, required: true },
           }}
           onSubmit={handleAccountCreation}

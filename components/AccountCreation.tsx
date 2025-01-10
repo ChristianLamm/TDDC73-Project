@@ -43,16 +43,13 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
     if (accountType === "email" && !email) {
       Alert.alert("Error", "Email is required.")
       return
-    }
+    } else formData.email = email
+
     // Kollar så username fältet är ifyllt
     if (accountType === "username" && !username) {
       Alert.alert("Error", "Username is required.")
       return
-    }
-
-    // Sätt formData till värde
-    if (accountType === "email") formData.email = email
-    if (accountType === "username") formData.username = username
+    } else formData.username = username
 
     // Kollar om firstname fältet visas, och om det är ett krav att fylla i
     if (fields.firstName?.show) {
@@ -88,7 +85,7 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
 
   return (
     <View style={styles.container}>
-      {accountType == "email" ? (
+      {accountType === "email" ? (
         <View style={styles.sidebyside}>
           <IconSymbol
             size={28}
@@ -117,7 +114,6 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
           <TextInput
             style={styles.input}
             placeholder="Enter your email"
-            value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
             autoCapitalize="none"
@@ -130,25 +126,12 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
           <TextInput
             style={styles.input}
             placeholder="Enter your username"
-            value={username}
             onChangeText={setUsername}
             autoCapitalize="none"
             hitSlop={{ top: 10, bottom: 10 }}
           />
         </View>
-      ) : (
-        <View>
-          <Text style={styles.text}>Username:</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your username"
-            value={username}
-            onChangeText={setUsername}
-            autoCapitalize="none"
-            hitSlop={{ top: 10, bottom: 10 }}
-          />
-        </View>
-      )}
+      ) : null}
 
       {/* Firstname */}
       {fields.firstName?.show && (
@@ -157,7 +140,6 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
           <TextInput
             style={styles.input}
             placeholder="Enter your first name"
-            value={firstName}
             onChangeText={setFirstName}
             hitSlop={{ top: 10, bottom: 10 }}
           />
@@ -171,7 +153,6 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
           <TextInput
             style={styles.input}
             placeholder="Enter your last name"
-            value={lastName}
             onChangeText={setLastName}
             hitSlop={{ top: 10, bottom: 10 }}
           />
@@ -185,7 +166,6 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
           <TextInput
             style={styles.input}
             placeholder="Enter your password"
-            value={password}
             onChangeText={setPassword}
             secureTextEntry
             hitSlop={{ top: 20, bottom: 20 }}

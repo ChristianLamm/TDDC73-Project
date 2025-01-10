@@ -10,21 +10,16 @@ import React, { useState } from "react"
 import TestPassword from "@/components/TestPassword"
 
 export default function Index() {
-  const [password, setPassword] = useState("")
-
-  const handleInputChange = (text: string) => {
-    setPassword(text)
-  }
+  const [password, setPassword] = useState<string>("")
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <View style={styles.background}>
+      <View style={styles.background}>
+        <View style={styles.container}>
           <Text style={styles.text}>Test the strength of your password</Text>
           <TextInput
             style={styles.input}
-            value={password}
-            onChangeText={handleInputChange}
+            onChangeText={setPassword}
             placeholder="Insert password..."
             hitSlop={{ top: 20, bottom: 20 }}
           />
@@ -37,7 +32,7 @@ export default function Index() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
     backgroundColor: "#1a1a1a",
   },
@@ -58,7 +53,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#ffffff",
   },
-  background: {
+  container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
