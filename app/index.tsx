@@ -1,4 +1,4 @@
-import { Text, TextInput, View, StyleSheet, Button } from "react-native"
+import { Text, TextInput, View, StyleSheet, Button, TouchableWithoutFeedback,Keyboard} from "react-native"
 import React, { useState } from "react"
 import { Colors } from "react-native/Libraries/NewAppScreen"
 import TestPassword from "@/components/TestPassword"
@@ -18,6 +18,7 @@ export default function Index() {
   }
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View
       style={{
         flex: 1,
@@ -31,14 +32,8 @@ export default function Index() {
         value={password}
         onChangeText={handleInputChange}
         placeholder="Insert password..."
-        // {/*
-        // placeholderTextColor="#000000"
-        // cursorColor="blue"
-        // selectionColor="#000000"
-        // secureTextEntry
-        // */}
+        hitSlop={{ top: 20, bottom: 20}}
 
-        //color='#000000'
       />
       <Text style={styles.text}>Strength of password:</Text>
       <TestPassword testPassword={password} textColor="#ffffff" />
@@ -46,6 +41,8 @@ export default function Index() {
 
       {/* <Button title="Confirm" onPress={confirmButton} /> */}
     </View>
+    </TouchableWithoutFeedback>
+
   )
 }
 

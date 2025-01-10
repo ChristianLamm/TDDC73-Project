@@ -108,7 +108,7 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
           />
           <Text style={styles.title}>Create Account with Username</Text>
         </View>
-     ): null}
+      ) : null}
 
       {/* Visa Email eller Username fältet baserad på accountType */}
       {accountType === "email" ? (
@@ -121,6 +121,7 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
             onChangeText={setEmail}
             keyboardType="email-address"
             autoCapitalize="none"
+            hitSlop={{ top: 10, bottom: 10 }}
           />
         </View>
       ) : accountType === "username" ? (
@@ -132,6 +133,7 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
             value={username}
             onChangeText={setUsername}
             autoCapitalize="none"
+            hitSlop={{ top: 10, bottom: 10 }}
           />
         </View>
       ) : (
@@ -143,6 +145,7 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
             value={username}
             onChangeText={setUsername}
             autoCapitalize="none"
+            hitSlop={{ top: 10, bottom: 10 }}
           />
         </View>
       )}
@@ -156,6 +159,7 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
             placeholder="Enter your first name"
             value={firstName}
             onChangeText={setFirstName}
+            hitSlop={{ top: 10, bottom: 10 }}
           />
         </View>
       )}
@@ -169,6 +173,7 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
             placeholder="Enter your last name"
             value={lastName}
             onChangeText={setLastName}
+            hitSlop={{ top: 10, bottom: 10 }}
           />
         </View>
       )}
@@ -183,6 +188,7 @@ const AccountCreationForm: React.FC<AccountCreationProps> = ({
             value={password}
             onChangeText={setPassword}
             secureTextEntry
+            hitSlop={{ top: 20, bottom: 20 }}
           />
           <View style={{ alignSelf: "center" }}>
             <TestPassword testPassword={password} textColor="#ffffff" />

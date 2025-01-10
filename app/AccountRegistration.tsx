@@ -6,6 +6,8 @@ import {
   Button,
   SafeAreaView,
   Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native"
 import React, { useState } from "react"
 //import PWTest from "@/components/testPassword"
@@ -20,18 +22,20 @@ const AccountRegistration = () => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <AccountCreation
-        accountType="email" // Byt mellan username & email 
-        fields={{
-          // Välj vilka input fields
-          firstName: { show: true, required: false },
-          lastName: { show: true, required: false }, // required = false om inget anges
-          password: { show: true, required: true },
-        }}
-        onSubmit={handleAccountCreation}
-      />
-    </SafeAreaView>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <SafeAreaView style={styles.container}>
+        <AccountCreation
+          accountType="email" // Byt mellan username & email
+          fields={{
+            // Välj vilka input fields
+            firstName: { show: true, required: false },
+            lastName: { show: true, required: false }, // required = false om inget anges
+            password: { show: true, required: true },
+          }}
+          onSubmit={handleAccountCreation}
+        />
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   )
 }
 
